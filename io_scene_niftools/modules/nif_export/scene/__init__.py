@@ -47,7 +47,14 @@ def get_version_data():
     b_scene = bpy.context.scene.niftools_scene
     game = b_scene.game
     version = b_scene.nif_version
-    NifLog.info(f"Writing NIF version 0x{version:08X}")
+    if not version or game == 'UNKNOWN':
+        version = 0x14030009
+        game = 'DIGIMON_MASTERS_ONLINE'
+        b_scene.game = game
+        b_scene.nif_version = version
+        b_scene.user_version = 0
+        b_scene.user_version_2 = 0
+    NifLog.info(f"Writing NIF version 0x{version:08X} ({game})")
 
     # get user version and user version 2 for export
     user_version = b_scene.user_version

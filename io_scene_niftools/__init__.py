@@ -99,8 +99,14 @@ def register():
 
 def unregister():
     # addon updater unregister
-    unregister_modules(MODS, __name__)
-    addon_updater_ops.unregister()
+    try:
+        unregister_modules(MODS, __name__)
+    except Exception:
+        pass
+    try:
+        addon_updater_ops.unregister()
+    except Exception:
+        pass
 
 
 def select_zip_file(self, tag):

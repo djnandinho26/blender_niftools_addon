@@ -48,6 +48,27 @@ class OperatorSetting:
     bl_parent_id = "FILE_PT_operator"
 
 
+class OperatorExportGamePanel(OperatorSetting, Panel):
+    bl_label = "Game & Version"
+    bl_idname = "NIFTOOLS_PT_export_operator_game"
+
+    @classmethod
+    def poll(cls, context):
+        sfile = context.space_data
+        operator = sfile.active_operator
+
+        return operator.bl_idname == "EXPORT_SCENE_OT_nif"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+
+        nif_scene_props = context.scene.niftools_scene
+        layout.prop(nif_scene_props, "game", text="Game Preset")
+        layout.prop(nif_scene_props, "nif_version", text="Version")
+
+
 class OperatorExportTransformPanel(OperatorSetting, Panel):
     bl_label = "Transform"
     bl_idname = "NIFTOOLS_PT_export_operator_transform"
@@ -148,6 +169,7 @@ class OperatorExportOptimisePanel(OperatorSetting, Panel):
 
 
 classes = [
+    OperatorExportGamePanel,
     OperatorExportTransformPanel,
     OperatorExportArmaturePanel,
     OperatorExportAnimationPanel,

@@ -81,7 +81,7 @@ class Scene(PropertyGroup):
     nif_version: IntProperty(
         name='Version',
         description="The Gamebryo Engine version used",
-        default=0
+        default=335740937
     )
 
     user_version: IntProperty(
@@ -105,7 +105,7 @@ class Scene(PropertyGroup):
         ],
         name="Game",
         description="For which game to export",
-        default='UNKNOWN',
+        default='DIGIMON_MASTERS_ONLINE',
         update=update_version_from_game)
 
     def is_bs(self):
